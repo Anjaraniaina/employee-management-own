@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Form</h1>
+<form action="#" th:action="@{/employees}" th:object="${employee}" method="post" enctype="multipart/form-data">
+    <input type="text" placeholder="Lastname" th:field="*{lastName}" />
+    <input type="text" placeholder="Firstname" th:field="*{firstName}" />
+    <input type="date" placeholder="Birthdate" th:field="*{birthDate}" />
+    <input type="file" name="file" accept="image/*"/>
+    <button type="submit">Add or Update a new employee</button>
+</form>
+</body>
+</html>
