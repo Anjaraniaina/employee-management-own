@@ -3,31 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Employee</title>
-    <link href = "css/styles.css" rel = "stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 </head>
 <body>
-<h1 class="title">
-    Employee List
-</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Firstname</th>
-            <th>Firstname</th>
-            <th>Birthdate</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="employee : ${employees}">
-            <td th:text="${employee.id}" />
-            <td th:text="${employee.lastName}" />
-            <td th:text="${employee.firstName}" />
-            <td th:text="${employee.birthDate}" />
-        </tr>
-    </tbody>
-</table>
-<hr />
-<a th:href="@{/employee-form}">Add or update Employee</a>
+    <div class="container">
+        <h1 class="display-3">
+            Employee List
+        </h1>
+        <hr />
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Firstname</th>
+                <th>Birthdate</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.id}" />
+                <td th:text="${employee.lastName}" />
+                <td th:text="${employee.firstName}" />
+                <td th:text="${employee.birthDate}" />
+                <td>
+                    <a th:href="@{/employee(employeeId=${employee.id})}" class="btn btn-success">Profile</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <hr />
+        <a th:href="@{/employee-form}" class="btn btn-primary">Add or update Employee</a>
+    </div>
 </body>
 </html>

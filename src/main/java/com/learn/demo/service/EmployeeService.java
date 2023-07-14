@@ -54,6 +54,7 @@ public class EmployeeService {
         return Base64.getEncoder().encodeToString(resizeAndCompress(file, 100));
     }
 
+    // not my code
     public static byte[] resizeAndCompress(MultipartFile file, int maxSize) throws IOException {
 
         BufferedImage originalImage = ImageIO.read(file.getInputStream());

@@ -21,6 +21,6 @@ public class Employee {
     private String lastName;
     private String firstName;
     private LocalDate birthDate;
-    @Column(length = 2000)
+    @Column(length = 4000)
     private String image;
 }

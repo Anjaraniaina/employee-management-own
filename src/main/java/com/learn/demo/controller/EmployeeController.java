@@ -31,6 +31,13 @@ public class EmployeeController {
         return "employeelist.html";
     }
 
+    @GetMapping("/employee")
+    public String getEmployee(@RequestParam Long employeeId, Model model) {
+        Employee employee = employeeService.getById(employeeId);
+        model.addAttribute("employee", employee);
+        return "employee.html";
+    }
+
     @GetMapping("/employee-form")
     public String employeeForm(Model model) {
         model.addAttribute("employee", new Employee());
