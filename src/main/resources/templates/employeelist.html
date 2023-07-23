@@ -19,6 +19,7 @@
                 <th>Firstname</th>
                 <th>Firstname</th>
                 <th>Birthdate</th>
+                <th>Matricule</th>
             </tr>
             </thead>
             <tbody>
@@ -27,8 +28,12 @@
                 <td th:text="${employee.lastName}" />
                 <td th:text="${employee.firstName}" />
                 <td th:text="${employee.birthDate}" />
+                <td th:text="${employee.matricule}" />
                 <td>
                     <a th:href="@{/employee(employeeId=${employee.id})}" class="btn btn-success">Profile</a>
+                </td>
+                <td>
+                    <a th:href="@{/employee-form/edit(employeeId=${employee.id})}" class="btn btn-success">Edit</a>
                 </td>
             </tr>
             </tbody>

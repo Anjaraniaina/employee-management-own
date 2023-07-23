@@ -10,7 +10,7 @@
                 <hr />
                 <div class="justify-content-center">
                     <div class="card mb-3" style="width: 15rem;">
-                        <img th:src="@{'data:image/jpeg;base64,'+${employee.image}}" class="card-img-top" style="width: 250px; height: 200px; display: block" alt="Employee Image" >
+                        <img th:src="@{'data:image/jpeg;base64,'+${employee.image}}" class="card-img-top" style="width: 240px; height: 200px; display: block" alt="Employee Image" >
                         <div class="card-body">
                             <p class="card-text">Profile Picture</p>
                         </div>
@@ -20,6 +20,7 @@
                     <input type="text" class="form-control col-4 mb-3" th:field="*{lastName}" disabled />
                     <input type="text" class="form-control col-4 mb-3" th:field="*{firstName}" disabled/>
                     <input type="text" class="form-control col-4 mb-3" th:field="*{birthDate}" disabled/>
+                    <input type="text" class="form-control col-4 mb-3" th:field="*{matricule}" disabled/>
                 </form>
             </div>
         </div>
