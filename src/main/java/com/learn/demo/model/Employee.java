@@ -1,14 +1,13 @@
 package com.learn.demo.model;
 
-import com.learn.demo.repository.entity.CIN;
-import com.learn.demo.repository.entity.PhoneNumber;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,7 +21,8 @@ public class Employee {
     private LocalDate birthDate;
     private String image;
     private String address;
-    private List<PhoneNumber> phones;
+    private String phoneNumber;
+    @Enumerated(EnumType.STRING)
     private Employee.Sex sex;
     private String emailPro;
     private String emailPerso;
@@ -34,11 +34,12 @@ public class Employee {
     private LocalDate hiringDate;
     private LocalDate departureDate;
     private String cnapsNumber;
+    @Enumerated(EnumType.STRING)
     private Employee.CSP socioProCategory;
 
 
     public enum Sex {
-        H, F
+        M, F
     }
 
     public enum CSP {

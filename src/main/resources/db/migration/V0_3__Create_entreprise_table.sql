@@ -7,6 +7,6 @@ create table if not exists "entreprise"
     motto              varchar                  not null,
     address              varchar                  not null,
     email              varchar                  not null,
-    fiscal_identity_id              references   "fiscal_identity"(id),
+    fiscal_identity_id bigint references   "fiscal_identity"(id),
     logo               varchar                  not null
 );

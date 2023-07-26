@@ -1,8 +1,6 @@
 package com.learn.demo.repository.entity;
 
 import com.learn.demo.model.Employee;
-import com.learn.demo.repository.entity.CIN;
-import com.learn.demo.repository.entity.PhoneNumber;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,24 +21,32 @@ public class EmployeeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String matricule;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "first_name")
     private String firstName;
     private LocalDate birthDate;
     @Column(columnDefinition = "TEXT")
     private String image;
     private String address;
-    @OneToMany(mappedBy = "employee")
-    private List<PhoneNumber> phones;
+    private String phoneNumber;
+    @Enumerated(EnumType.STRING)
     private Employee.Sex sex;
     private String emailPro;
     private String emailPerso;
-    @OneToOne
-    @JoinColumn(name="cin_number", unique=true)
-    private CIN cin;
+    @Column(name = "\"cin_issue_date\"")
+    private LocalDate CINIssueDate;
+    @Column(name = "\"cin_number\"")
+    private String CINNumber;
+    @Column(name = "\"cin_delivrance_location\"")
+    private String CINDelivranceLocation;
     private Integer children;
     private String function;
+    @Column(name = "hiring_date")
     private LocalDate hiringDate;
+    @Column(name = "departure_date")
     private LocalDate departureDate;
     private String cnapsNumber;
+    @Enumerated(EnumType.STRING)
     private Employee.CSP socioProCategory;
 }

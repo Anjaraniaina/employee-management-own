@@ -1,19 +1,22 @@
 package com.learn.demo.model;
 
-import com.learn.demo.repository.entity.FiscalIdentity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Entreprise {
     private String name;
     private String description;
     private String motto;
     private String address;
     private String email;
-    private FiscalIdentity identityFiscal;
+    private String nif;
+    private String stat;
+    private String rcs;
     private String logo;
 }

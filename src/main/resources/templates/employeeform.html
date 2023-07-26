@@ -3,6 +3,7 @@
     <title>Employee</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
+<div th:insert="~{fragments/navbar.html :: navbar(${entreprise})}"></div>
 <div class="container">
     <div class="row justify-content-center  align-item-center mt-3">
         <div class="col-4">
@@ -11,34 +12,46 @@
             <form action="#" th:action="@{/employees}" th:object="${employee}" method="post" enctype="multipart/form-data">
                 <input type="text" placeholder="Lastname" class="form-control col-4 mb-3" th:field="*{lastName}" />
                 <input type="text" placeholder="Firstname" class="form-control col-4 mb-3" th:field="*{firstName}" />
-
-                <input type="date" placeholder="Birthdate" class="form-control col-4 mb-3" th:field="*{birthDate}" />
-                <select name="Sex" class="form-select form-select-lg mb-3" th:field="*{sex}">
-                    <option selected>Sex</option>
-                    <option th:value="'M'" th:text="Male"></option>
-                    <option th:value="'F'" th:text="Female"></option>
-                </select>
-                <select name="CSP" class="form-select form-select-lg mb-3" th:field="*{socioProCategory}">
-                    <option selected>Socioprofessional Category</option>
-                    <option th:each="category : ${T(employee.CSP).values()}"
-                            th:value="${category}" th:text="${category}"></option>
-                </select>
+                <label> Birthdate:
+                    <input type="date" placeholder="Birthdate" class="form-control col-4 mb-3" th:field="*{birthDate}" />
+                </label>
+s
+                <label> Sex:
+                    <select name="sex" class="form-select form-select-lg mb-3" th:field="*{sex}">
+                        <option th:each="sex : ${T(com.learn.demo.model.Employee.Sex).values()}"
+                                th:value="${sex}" th:text="${sex}"></option>
+                    </select>
+                </label>
+                <label>Socio Professionnal Category
+                    <select name="socioProCategory" class="form-select form-select-lg mb-3" th:field="*{socioProCategory}">
+                        <option th:each="category : ${T(com.learn.demo.model.Employee.CSP).values()}"
+                                th:value="${category}" th:text="${category}"></option>
+                    </select>
+                </label>
                 <input type="text" placeholder="Address" class="form-control col-4 mb-3" th:field="*{address}" />
-
+                <input type="text" name="phoneNumbers" placeholder="Phone Numbers separated by ','" class="form-control col-4 mb-3"/>
                 <input type="text" placeholder="Pro Email" class="form-control col-4 mb-3" th:field="*{emailPro}" />
                 <input type="text" placeholder="Personnal email" class="form-control col-4 mb-3" th:field="*{emailPerso}" />
-                <label> CIN:
-                    <input type="text" placeholder="CIN number" class="form-control col-4 mb-3" th:field="*{CINNumber}" />
-                    <input type="text" placeholder="CIN issue date" class="form-control col-4 mb-3" th:field="*{CINIssueDate}" />
-                    <input type="text" placeholder="CIN delivrance location" class="form-control col-4 mb-3" th:field="*{CINDelivranceLocation}" />
+                <label> CIN Number:
+                    <input type="text" placeholder="CIN number" class="form-control col-4 mb-3" th:field="*{CINNumber}" th:value="*{CINNumber}" />
+                </label>
+                <label> CIN issue date:
+                    <input type="date" placeholder="CIN issue date" class="form-control col-4 mb-3" th:field="*{{CINIssueDate}}" th:value="*{CINIssueDate}" />
+                </label>
+                <label> CIN delivrance location
+                    <input type="text" placeholder="CIN delivrance location" class="form-control col-4 mb-3" th:field="*{CINDelivranceLocation}" th:value="*{CINDelivranceLocation}"/>
                 </label>
                 <input type="text" placeholder="Number of children" class="form-control col-4 mb-3" th:field="*{children}" />
                 <input type="text" placeholder="Function" class="form-control col-4 mb-3" th:field="*{function}" />
-                <input type="date" placeholder="Hiring date" class="form-control col-4 mb-3" th:field="*{hiringDate}" />
-                <input type="date" placeholder="Departure date" class="form-control col-4 mb-3" th:field="*{departureDate}" />
+                <label> Hiring date:
+                    <input type="date" placeholder="Hiring date" class="form-control col-4 mb-3" th:field="*{hiringDate}" />
+                </label>
+                <label> Departure date:
+                    <input type="date" placeholder="Departure date" class="form-control col-4 mb-3" th:field="*{departureDate}" />
+                </label>
                 <input type="text" placeholder="CNAPS number" class="form-control col-4 mb-3" th:field="*{cnapsNumber}" />
                 <input type="file" class="form-control col-4 mb-3" name="file" accept="image/*"/>
-                <button type="submit" class="btn btn-primary">Add or Update a new employee</button>
+                <button type="submit" class="btn btn-primary">Add the employee</button>
             </form>
         </div>
     </div>

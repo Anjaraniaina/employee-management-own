@@ -21,5 +21,6 @@ public class EntrepriseEntity {
     @OneToOne
     @JoinColumn(name="fiscal_identity_id", unique=true)
     private FiscalIdentity fiscalIdentity;
+    @Column(columnDefinition = "TEXT")
     private String logo;
 }

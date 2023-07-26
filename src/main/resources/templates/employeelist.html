@@ -3,43 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <title>Employee</title>
+    <link href = "css/styles.css" rel = "stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
-<body>
-    <div class="container">
-        <h1 class="display-3">
+
+<div th:insert="~{fragments/navbar.html :: navbar(${entreprise})}"></div>
+
+<div class="container">
+        <h1 class="display-6">
             Employee List
         </h1>
         <hr />
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Firstname</th>
-                <th>Firstname</th>
-                <th>Birthdate</th>
-                <th>Matricule</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="employee : ${employees}">
-                <td th:text="${employee.id}" />
-                <td th:text="${employee.lastName}" />
-                <td th:text="${employee.firstName}" />
-                <td th:text="${employee.birthDate}" />
-                <td th:text="${employee.matricule}" />
-                <td>
-                    <a th:href="@{/employee(employeeId=${employee.id})}" class="btn btn-success">Profile</a>
-                </td>
-                <td>
-                    <a th:href="@{/employee-form/edit(employeeId=${employee.id})}" class="btn btn-success">Edit</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="container">
+                <form class="row" action="#" th:action="@{/employees}" th:object="${searchForm}" method="get" enctype="multipart/form-data">
+                    <div class="col-2">
+                        <input type="text" th:field="*{keyword}" class="form-control" name="keyword">
+                    </div>
+                    <div class="col-2">
+                        <select name="filterBy" th:field="*{filterBy}" class="form-select form-select-sm mb-3">
+                            <option selected th:value="firstName" th:text="Firstname"></option>
+                            <option th:value="lastName" th:text="Lastname"></option>
+                            <option th:value="function" th:text="Function"></option>
+                        </select>
+                    </div>
+                    <div id="date-search" class="col-3">
+                        <div class="row">
+                            <div class="row">
+                                <label>Hiring date</label>
+                                <input type="date" th:field="*{hiringDate}" class="form-control" name="hiringDate">
+                            </div>
+                            <div class="row">
+                                <label>Departure date</label>
+                                <input type="date" th:field="*{departureDate}" class="form-control" name="departureDate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <select name="order" th:field="*{order}" class="form-select form-select-sm mb-3">
+                            <option selected th:value="ASC" th:text="ASC"></option>
+                            <option th:value="DESC" th:text="DESC"></option>
+                        </select>
+                    </div>
+                    <div class="col-1">
+                        <div class="row">
+                            <p>Sex: </p>
+                            <select name="sex" th:field="*{sex}" class="form-select form-select-sm mb-3">
+                                <option selected th:value="All" th:text="All"></option>
+                                <option th:value="F" th:text="Female"></option>
+                                <option th:value="M" th:text="Male"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                    </div>
+                </form>
+
+                <button><a class="btn btn-success" th:href="@{/employees/csv(${employees})}">Export to csv</a></button>
+        </div>
+        <div class="scrollable">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr class="align-middle">
+                        <th scope="col">Id</th>
+                        <th scope="col">Lastname</th>
+                        <th scope="col">Firstname</th>
+                        <th scope="col">Birthdate</th>
+                        <th scope="col">Sex</th>
+                        <th scope="col">Matricule</th>
+                        <th scope="col">CIN number</th>
+                        <th scope="col">CIN issue date</th>
+                        <th scope="col">CIN delivrance location</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Email Pro</th>
+                        <th scope="col">Email Perso</th>
+                        <th scope="col">SocioProfessional category</th>
+                        <th scope="col">Children count</th>
+                        <th scope="col">Function</th>
+                        <th scope="col">Hiring Date</th>
+                        <th scope="col">Departure Date</th>
+                        <th scope="col">CNAPS Number</th>
+                        <th scope="col">Phone Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="employee : ${employees}">
+                        <th scope="row" th:text="${employee.id}" />
+                        <td th:text="${employee.lastName}" />
+                        <td th:text="${employee.firstName}" />
+                        <td th:text="${employee.birthDate}" />
+                        <td th:text="${employee.sex}" />
+                        <td th:text="${employee.matricule}" />
+                        <td th:text="${employee.CINNumber}" />
+                        <td th:text="${employee.CINIssueDate}" />
+                        <td th:text="${employee.CINDelivranceLocation}" />
+                        <td th:text="${employee.address}" />
+                        <td th:text="${employee.emailPro}" />
+                        <td th:text="${employee.emailPerso}" />
+                        <td th:text="${employee.socioProCategory}" />
+                        <td th:text="${employee.children}" />
+                        <td th:text="${employee.function}" />
+                        <td th:text="${employee.hiringDate}" />
+                        <td th:text="${employee.departureDate}" />
+                        <td th:text="${employee.cnapsNumber}" />
+                        <td th:text="${employee.phoneNumber}" />
+                        <td>
+                            <a th:href="@{/employee(employeeId=${employee.id})}" class="btn btn-success">Profile</a>
+                        </td>
+                        <td>
+                            <a th:href="@{/employee-form/edit(employeeId=${employee.id})}" class="btn btn-success">Edit</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <hr />
-        <a th:href="@{/employee-form}" class="btn btn-primary">Add or update Employee</a>
+        <a th:href="@{/employee-form}" class="btn btn-primary">Add new employee</a>
     </div>
-</body>
 </html>

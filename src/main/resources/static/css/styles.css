@@ -1,3 +1,8 @@
 .title {
     color: blue;
 }
+
+.scrollable {
+    height: 400px;
+    overflow-y: scroll;
+}

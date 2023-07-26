@@ -1,25 +1,24 @@
 package com.learn.demo.controller.mapper;
 
 import com.learn.demo.model.Employee;
-import com.learn.demo.repository.entity.CIN;
 import com.learn.demo.repository.entity.EmployeeEntity;
-import com.learn.demo.service.CINService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 @AllArgsConstructor
 public class EmployeeMapper {
-    private CINService cinService;
     public Employee toModel(EmployeeEntity entity){
         return Employee.builder()
                 .id(entity.getId())
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
-                .CINIssueDate(entity.getCin().getIssueDate())
-                .CINDelivranceLocation(entity.getCin().getDelivranceLocation())
-                .CINNumber(entity.getCin().getNumber())
+                .CINIssueDate(entity.getCINIssueDate())
+                .CINNumber(entity.getCINNumber())
+                .CINDelivranceLocation(entity.getCINDelivranceLocation())
                 .emailPerso(entity.getEmailPerso())
                 .address(entity.getAddress())
                 .emailPro(entity.getEmailPro())
@@ -29,7 +28,7 @@ public class EmployeeMapper {
                 .image(entity.getImage())
                 .matricule(entity.getMatricule())
                 .sex(entity.getSex())
-                .phones(entity.getPhones())
+                .phoneNumber(entity.getPhoneNumber())
                 .children(entity.getChildren())
                 .cnapsNumber(entity.getCnapsNumber())
                 .birthDate(entity.getBirthDate())
@@ -39,13 +38,12 @@ public class EmployeeMapper {
 
     public EmployeeEntity toDomain(Employee model){
         return EmployeeEntity.builder()
+                .id(model.getId())
                 .firstName(model.getFirstName())
                 .lastName(model.getLastName())
-                .cin(CIN.builder()
-                        .number(model.getCINNumber())
-                        .delivranceLocation(model.getCINDelivranceLocation())
-                        .issueDate(model.getCINIssueDate())
-                        .build())
+                        .CINNumber(model.getCINNumber())
+                        .CINDelivranceLocation(model.getCINDelivranceLocation())
+                        .CINIssueDate(model.getCINIssueDate())
                 .emailPerso(model.getEmailPerso())
                 .address(model.getAddress())
                 .emailPro(model.getEmailPro())
@@ -55,7 +53,7 @@ public class EmployeeMapper {
                 .image(model.getImage())
                 .matricule(model.getMatricule())
                 .sex(model.getSex())
-                .phones(model.getPhones())
+                .phoneNumber(model.getPhoneNumber())
                 .children(model.getChildren())
                 .cnapsNumber(model.getCnapsNumber())
                 .birthDate(model.getBirthDate())

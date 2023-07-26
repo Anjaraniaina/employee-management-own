@@ -10,7 +10,11 @@ create table if not exists "employee"
     sex                     varchar,
     email_pro               varchar,
     email_perso             varchar,
-    cin_number              references "cin"(number),
+    phone_number             varchar
+        constraint phone_number_unique unique,
+    cin_number    varchar,
+    cin_issue_date    date,
+    cin_delivrance_location    varchar,
     children                int,
     function                varchar,
     hiring_date date default now(),
