@@ -11,6 +11,7 @@ import java.util.List;
 @Component
 @AllArgsConstructor
 public class EmployeeMapper {
+    private PhoneNumberMapper phoneNumberMapper;
     public Employee toModel(EmployeeEntity entity){
         return Employee.builder()
                 .id(entity.getId())
@@ -28,7 +29,7 @@ public class EmployeeMapper {
                 .image(entity.getImage())
                 .matricule(entity.getMatricule())
                 .sex(entity.getSex())
-                .phoneNumber(entity.getPhoneNumber())
+                .phoneNumber(phoneNumberMapper.toModel(entity.getPhoneNumbers()))
                 .children(entity.getChildren())
                 .cnapsNumber(entity.getCnapsNumber())
                 .birthDate(entity.getBirthDate())
@@ -47,13 +48,13 @@ public class EmployeeMapper {
                 .emailPerso(model.getEmailPerso())
                 .address(model.getAddress())
                 .emailPro(model.getEmailPro())
+                .phoneNumbers(phoneNumberMapper.toDomain(model.getPhoneNumber(), model.getId()))
                 .function(model.getFunction())
                 .hiringDate(model.getHiringDate())
                 .departureDate(model.getDepartureDate())
                 .image(model.getImage())
                 .matricule(model.getMatricule())
                 .sex(model.getSex())
-                .phoneNumber(model.getPhoneNumber())
                 .children(model.getChildren())
                 .cnapsNumber(model.getCnapsNumber())
                 .birthDate(model.getBirthDate())

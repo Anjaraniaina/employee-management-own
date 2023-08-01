@@ -11,72 +11,38 @@ import java.util.List;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
-//    @Query(value = "SELECT (phone_number) FROM employee e", nativeQuery=true)
+//    @Query(value = "SELECT (phone_number) FROM employee e ", nativeQuery=true)
 //    List<String> findAllPhoneNumber();
 //
-//    @Query(value = "SELECT (phone_number) FROM employee e WHERE e.phone_number LIKE %:phonenumber%", nativeQuery=true)
-//    List<String> filterPhoneNumber(@Param("phonenumber") String phoneNumber);
+//    @Query(value = "SELECT e.phone_number FROM employee e WHERE e.phone_number LIKE %1?%", nativeQuery=true)
+//    List<String> filterPhoneNumber( String phoneNumber);
 //
-//    @Query(value = "SELECT e FROM employee e WHERE e.lastName LIKE '%' || :firstname || '%' AND e.sex=:sex ORDER BY e.lastName", nativeQuery=true)
-//    List<EmployeeEntity> findEmployeeByLastNameAndSex(@Param("lastname") String lastName, @Param("sex") String sex);
+//    @Query(value = "SELECT e FROM employee e WHERE e.last_name LIKE %1?% AND e.sex=?2 ORDER BY e.last_name ?3", nativeQuery = true)
+//    List<EmployeeEntity> findEmployeeByLastNameAndSex(String lastName, String sex, String order);
 //
-//    @Query(value = "SELECT e FROM employee e WHERE e.lastName LIKE '%' || :firstname || '%' ORDER BY e.lastName", nativeQuery=true)
-//    List<EmployeeEntity> findAllEmployeeByLastName(@Param("lastname") String lastName);
+//    @Query(value = "SELECT e FROM employee e WHERE e.last_name LIKE %1?% ORDER BY e.last_name ?2", nativeQuery=true)
+//    List<EmployeeEntity> findAllEmployeeByLastName(String lastName, String order);
 //
-//    @Query(value = "SELECT e FROM employee e WHERE e.firstName LIKE '%' || :firstname || '%' ORDER BY e.firstName", nativeQuery=true)
-//    List<EmployeeEntity> findAllEmployeeByFirstName(@Param("firstname") String firstName);
+//    @Query(value = "SELECT e FROM employee e WHERE e.first_name LIKE %1?% ORDER BY e.first_name ?2", nativeQuery = true)
+//    List<EmployeeEntity> findAllEmployeeByFirstName(String firstName, String order);
 //
-//    @Query(value = "SELECT e FROM employee e WHERE e.firstName LIKE '%' || :firstname || '%' AND e.sex=:sex ORDER BY e.firstName", nativeQuery=true)
-//    List<EmployeeEntity> findEmployeeByFirstNameAndSex(@Param("firstname") String firstName, @Param("sex") String sex);
+//    @Query(value = "SELECT e FROM employee e WHERE e.first_name LIKE %1?% AND e.sex=?2 ORDER BY e.first_name ?3", nativeQuery=true)
+//    List<EmployeeEntity> findEmployeeByFirstNameAndSex(String firstName, String sex, String order);
 //
-//    @Query(value = "SELECT e FROM employee e WHERE e.function LIKE %:function% AND e.sex=:sex ORDER BY e.function", nativeQuery=true)
-//    List<EmployeeEntity> findEmployeeByFunctionAndSex(@Param("function") String function, @Param("sex") String sex);
+//    @Query(value = "SELECT e FROM employee e WHERE e.function LIKE %1?% AND e.sex=?2 ORDER BY e.function ?3", nativeQuery=true)
+//    List<EmployeeEntity> findEmployeeByFunctionAndSex(String function, String sex, String order);
 //
-//    @Query(value = "SELECT e FROM employee e WHERE e.function LIKE %:function% ORDER BY e.function", nativeQuery=true)
-//    List<EmployeeEntity> findAllEmployeeByFunction(@Param("function") String function);
+//    @Query(value = "SELECT e FROM employee e WHERE e.function LIKE %1?% ORDER BY e.function ?2", nativeQuery = true)
+//    List<EmployeeEntity> findAllEmployeeByFunction(String function, String order);
 //
-//    @Query(value = "SELECT e FROM employee e ORDER BY e.id", nativeQuery=true)
-//    List<EmployeeEntity> findAllEmployeeOrderedById(@Param("order") String order);
+//    @Query(value = "SELECT e FROM employee e ORDER BY e.id" + " ?1", nativeQuery=true)
+//    List<EmployeeEntity> findAllEmployeeOrderedById(String order);
 //
 //    // after provided hiring date and before provided departure date
-//    @Query(value = "SELECT e FROM employee e WHERE e.hiringDate >= :hiringdate AND e.departureDate <= :departuredate AND e.sex=:sex ORDER BY e.id", nativeQuery=true)
-//    List<EmployeeEntity> findEmployeeByHiringAndDepartureDateAndSex(@Param("hiringdate") String hiringDate, @Param("departuredate") String departureDate, @Param("sex") String sex);
+//    @Query(value = "SELECT e FROM employee e WHERE e.hiring_date >= ?1 AND e.departure_date <= ?2 AND e.sex=?3 ORDER BY e.id ?4", nativeQuery=true)
+//    List<EmployeeEntity> findEmployeeByHiringAndDepartureDateAndSex(String hiringDate, String departureDate, String sex, String order);
 //
-//    @Query(value = "SELECT e FROM employee e WHERE e.hiringDate >= :hiringdate AND e.departureDate <= :departuredate ORDER BY e.id", nativeQuery=true)
-//    List<EmployeeEntity> findAllEmployeeByHiringAndDepartureDate(@Param("hiringdate") String hiringDate, @Param("departuredate") String departureDate);
-
-    @Query(value = "SELECT phone_number FROM employee e", nativeQuery=true)
-    List<String> findAllPhoneNumber();
-
-    @Query(value = "SELECT e.phone_number FROM employee e WHERE e.phone_number LIKE CONCAT('%',:phonenumber,'%') ", nativeQuery = true)
-    List<String> filterPhoneNumber(@Param("phonenumber") String phoneNumber);
-
-    @Query(value = "SELECT e FROM EmployeeEntity e WHERE e.lastName LIKE '%' || :lastname || '%' AND e.sex = :sex ORDER BY e.lastName")
-    List<EmployeeEntity> findEmployeeByLastNameAndSex(@Param("lastname") String lastName, @Param("sex") String sex);
-
-    @Query(value = "SELECT e FROM EmployeeEntity e WHERE e.lastName LIKE '%' || :lastname || '%' ORDER BY e.lastName")
-    List<EmployeeEntity> findAllEmployeeByLastName(@Param("lastname") String lastName);
-
-    @Query(value = "SELECT e FROM EmployeeEntity e WHERE e.firstName LIKE '%' || :firstname || '%' ORDER BY e.firstName")
-    List<EmployeeEntity> findAllEmployeeByFirstName(@Param("firstname") String firstName);
-
-    @Query(value = "SELECT e FROM EmployeeEntity e WHERE e.firstName LIKE '%' || :firstname || '%' AND e.sex = :sex ORDER BY e.firstName")
-    List<EmployeeEntity> findEmployeeByFirstNameAndSex(@Param("firstname") String firstName, @Param("sex") String sex);
-
-    @Query(value = "SELECT e FROM EmployeeEntity e WHERE e.function LIKE '%' || :function || '%' AND e.sex = :sex ORDER BY e.function")
-    List<EmployeeEntity> findEmployeeByFunctionAndSex(@Param("function") String function, @Param("sex") String sex);
-
-    @Query(value = "SELECT e FROM EmployeeEntity e WHERE e.function LIKE '%' || :function || '%' ORDER BY e.function")
-    List<EmployeeEntity> findAllEmployeeByFunction(@Param("function") String function);
-
-    @Query(value = "SELECT e FROM EmployeeEntity e ORDER BY e.id")
-    List<EmployeeEntity> findAllEmployeeOrderedById();
-
-    // after provided hiring date and before provided departure date
-    @Query(value = "SELECT e FROM EmployeeEntity e WHERE e.hiringDate >= :hiringdate AND e.departureDate <= :departuredate AND e.sex = :sex ORDER BY e.id")
-    List<EmployeeEntity> findEmployeeByHiringAndDepartureDateAndSex(@Param("hiringdate") String hiringDate, @Param("departuredate") String departureDate, @Param("sex") String sex);
-
-    @Query(value = "SELECT e FROM EmployeeEntity e WHERE e.hiringDate >= :hiringdate AND e.departureDate <= :departuredate ORDER BY e.id")
-    List<EmployeeEntity> findAllEmployeeByHiringAndDepartureDate(@Param("hiringdate") String hiringDate, @Param("departuredate") String departureDate);
+//    @Query(value = "SELECT e FROM employee e WHERE e.hiring_date >= ?1 AND e.departure_date <= ?2 ORDER BY e.id ?4", nativeQuery=true)
+//    List<EmployeeEntity> findAllEmployeeByHiringAndDepartureDate(String hiringDate, String departureDate, String order);
 
 }

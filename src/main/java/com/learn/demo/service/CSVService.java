@@ -34,7 +34,7 @@ public class CSVService {
                         employee.getBirthDate(), employee.getEmailPerso(), employee.getEmailPro(),
                         employee.getCINDelivranceLocation(), employee.getCINIssueDate(), employee.getCINNumber(),
                         employee.getCnapsNumber(), employee.getFunction(), employee.getHiringDate(),
-                        employee.getDepartureDate(), employee.getPhoneNumber(), employee.getSex(),
+                        employee.getDepartureDate(), employee.getPhoneNumbers(), employee.getSex(),
                         employee.getSocioProCategory(), employee.getMatricule(), employee.getImage());
             }
         } catch (IOException e) {

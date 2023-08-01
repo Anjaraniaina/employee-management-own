@@ -16,12 +16,12 @@
         </h1>
         <hr />
         <div class="container">
-                <form class="row" action="#" th:action="@{/employees}" th:object="${searchForm}" method="get" enctype="multipart/form-data">
+                <form class="row" action="#" th:action="@{/employees}" method="get">
                     <div class="col-2">
-                        <input type="text" th:field="*{keyword}" class="form-control" name="keyword">
+                        <input type="text" class="form-control" name="keyword">
                     </div>
                     <div class="col-2">
-                        <select name="filterBy" th:field="*{filterBy}" class="form-select form-select-sm mb-3">
+                        <select name="filterBy" class="form-select form-select-sm mb-3">
                             <option selected th:value="firstName" th:text="Firstname"></option>
                             <option th:value="lastName" th:text="Lastname"></option>
                             <option th:value="function" th:text="Function"></option>
@@ -31,16 +31,16 @@
                         <div class="row">
                             <div class="row">
                                 <label>Hiring date</label>
-                                <input type="date" th:field="*{hiringDate}" class="form-control" name="hiringDate">
+                                <input type="date" class="form-control" name="hiringDate">
                             </div>
                             <div class="row">
                                 <label>Departure date</label>
-                                <input type="date" th:field="*{departureDate}" class="form-control" name="departureDate">
+                                <input type="date" class="form-control" name="departureDate">
                             </div>
                         </div>
                     </div>
                     <div class="col-1">
-                        <select name="order" th:field="*{order}" class="form-select form-select-sm mb-3">
+                        <select name="order" class="form-select form-select-sm mb-3">
                             <option selected th:value="ASC" th:text="ASC"></option>
                             <option th:value="DESC" th:text="DESC"></option>
                         </select>
@@ -48,7 +48,7 @@
                     <div class="col-1">
                         <div class="row">
                             <p>Sex: </p>
-                            <select name="sex" th:field="*{sex}" class="form-select form-select-sm mb-3">
+                            <select name="sex" class="form-select form-select-sm mb-3">
                                 <option selected th:value="All" th:text="All"></option>
                                 <option th:value="F" th:text="Female"></option>
                                 <option th:value="M" th:text="Male"></option>

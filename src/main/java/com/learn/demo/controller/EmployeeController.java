@@ -2,13 +2,16 @@ package com.learn.demo.controller;
 
 import com.learn.demo.controller.mapper.EmployeeMapper;
 import com.learn.demo.controller.mapper.EntrepriseMapper;
+import com.learn.demo.controller.mapper.PhoneNumberMapper;
 import com.learn.demo.model.Employee;
 import com.learn.demo.model.SearchForm;
 import com.learn.demo.repository.entity.EmployeeEntity;
 import com.learn.demo.repository.entity.EntrepriseEntity;
+import com.learn.demo.repository.entity.PhoneNumberEntity;
 import com.learn.demo.service.CSVService;
 import com.learn.demo.service.EmployeeService;
 import com.learn.demo.service.EntrepriseService;
+import com.learn.demo.service.PhoneNumberService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @AllArgsConstructor
@@ -31,6 +36,8 @@ import java.util.List;
 public class EmployeeController {
     private EmployeeService employeeService;
     private EntrepriseService entrepriseService;
+    private PhoneNumberService phoneNumberService;
+    private PhoneNumberMapper phoneNumberMapper;
     private EntrepriseMapper entrepriseMapper;
     private EmployeeMapper employeeMapper;
     private CSVService csvService;
@@ -52,16 +59,28 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    public String employeeList(Model model, @ModelAttribute("searchForm") SearchForm searchForm, @RequestParam(value = "filterBy", required = false) String filterBy,
+    public String employeeList(Model model, @RequestParam(value = "filterBy", required = false) String filterBy,
                                @RequestParam(value = "order", required = false) String order,
                                @RequestParam(value = "sex", required = false) String sex, @RequestParam(value = "keyword", required = false) String keyword,
                                @RequestParam(value = "hiringDate", required = false) LocalDate hiringDate, @RequestParam(value = "departureDate", required = false) LocalDate departureDate) {
-        List<EmployeeEntity> employeeList = employeeService.getAllEmployee();
+        log.error("SEX ORDER");
+        if(Objects.equals(order, null)) {
+            order = "ASC";
+        }
+        if(Objects.equals(sex, null)){
+            sex = "All";
+        }
+        if(Objects.equals(departureDate, null)){
+            departureDate = LocalDate.now();
+        }
+        System.out.println(order);
+        System.out.println(sex);
+        System.out.println(departureDate);
+        List<EmployeeEntity> employeeList = employeeService.filterEmployees(filterBy,
+                order, sex, keyword, hiringDate, departureDate);
         model.addAttribute("employees", employeeList.stream()
                 .map(employeeEntity -> employeeMapper.toModel(employeeEntity))
                 .toList());
-        model.addAttribute("searchForm", new SearchForm());
-        List<EmployeeEntity> filteredEmployeeList = employeeService.filter(searchForm);
         return "employeelist.html";
     }
 
@@ -112,12 +131,12 @@ public class EmployeeController {
 //        if (socioProCategory != null) {
 //            employee.setSocioProCategory(Employee.CSP.valueOf(socioProCategory));
 //        }
-        boolean b = phoneNumbers != null && employeeService.isUnique(Arrays.stream(phoneNumbers.split(",")).toList());
-        if ( phoneNumbers != null && b){
-            employee.setPhoneNumber(phoneNumbers);
-        }
+//        boolean b = phoneNumbers != null && employeeService.isUnique(Arrays.stream(phoneNumbers.split(",")).toList());
+//        if ( phoneNumbers != null && b){
+//            employee.setPhoneNumber(phoneNumbers);
+//        }
 
-        employee.setId(employeeId);
+        employee.setPhoneNumber(phoneNumbers);
         employeeService.addEmployee(employeeMapper.toDomain(employee));
         return "redirect:/employees";
     }

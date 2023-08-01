@@ -19,6 +19,7 @@ import java.util.List;
 public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     private String matricule;
     @Column(name = "last_name")
@@ -29,7 +30,8 @@ public class EmployeeEntity {
     @Column(columnDefinition = "TEXT")
     private String image;
     private String address;
-    private String phoneNumber;
+    @OneToMany(mappedBy = "employee")
+    private List<PhoneNumberEntity> phoneNumbers;
     @Enumerated(EnumType.STRING)
     private Employee.Sex sex;
     private String emailPro;
