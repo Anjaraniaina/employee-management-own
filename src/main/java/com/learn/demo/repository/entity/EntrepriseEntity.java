@@ -1,26 +1,21 @@
 package com.learn.demo.repository.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "\"fiscal_identity\"")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "\"entreprise\"")
-public class EntrepriseEntity {
+public class FiscalIdentity {
     @Id
     private Long id;
-    private String name;
-    private String description;
-    private String motto;
-    private String address;
-    private String email;
-    @OneToOne
-    @JoinColumn(name="fiscal_identity_id", unique=true)
-    private FiscalIdentity fiscalIdentity;
-    @Column(columnDefinition = "TEXT")
-    private String logo;
+    private String nif;
+    private String stat;
+    private String rcs;
 }
