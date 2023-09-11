@@ -16,7 +16,9 @@ public class PhoneNumberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "country_code")
     private String countryCode;
+    @Column(length = 10)
     private String number;
     @ManyToOne
     @JoinColumn(name = "employee_id")

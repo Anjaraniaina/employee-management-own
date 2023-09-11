@@ -1,7 +1,6 @@
-package com.learn.demo.repository.entity.employee;
+package com.learn.demo.repository.entity;
 
 import com.learn.demo.model.Employee;
-import com.learn.demo.repository.entity.PhoneNumberEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

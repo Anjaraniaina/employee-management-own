@@ -1,6 +1,7 @@
 package com.learn.demo.cnapsrepo.entity;
 
 import com.learn.demo.model.Employee;
+import com.learn.demo.repository.entity.PhoneNumberEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,25 +17,30 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class EmployeeEntity {
+public class EmployeeCnapsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+    @Column(name = "end_to_end_id")
+    private Long endToEndId;
     private String matricule;
     @Column(name = "last_name")
     private String lastName;
     @Column(name = "first_name")
     private String firstName;
+    @Column(name = "birth_date")
     private LocalDate birthDate;
     @Column(columnDefinition = "TEXT")
     private String image;
     private String address;
-    @Column(name = "\"phone_number\"")
-    private String phoneNumbers;
+    @Column(name = "phone_number")
+    private String phoneNumber;
     @Enumerated(EnumType.STRING)
     private Employee.Sex sex;
+    @Column(name = "email_pro")
     private String emailPro;
+    @Column(name = "email_perso")
     private String emailPerso;
     @Column(name = "\"cin_issue_date\"")
     private LocalDate CINIssueDate;
@@ -48,7 +54,9 @@ public class EmployeeEntity {
     private LocalDate hiringDate;
     @Column(name = "departure_date")
     private LocalDate departureDate;
+    @Column(name = "cnaps_number")
     private String cnapsNumber;
     @Enumerated(EnumType.STRING)
+    @Column(name = "socio_pro_category")
     private Employee.CSP socioProCategory;
 }

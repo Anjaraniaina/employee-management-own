@@ -2,8 +2,8 @@ create table if not exists "employee"
 (
     id                bigint
         constraint employee_pk primary key,
-    firstName              varchar                  not null,
-    lastName              varchar                  not null,
+    first_name              varchar                  not null,
+    last_name              varchar                  not null,
     birth_date              date,
     image                   text,
     address                 varchar,

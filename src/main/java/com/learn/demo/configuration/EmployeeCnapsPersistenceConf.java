@@ -1,7 +1,8 @@
 package com.learn.demo.configuration;
 
-import org.hibernate.cfg.Environment;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.flywaydb.core.Flyway;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.flyway.FlywayDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -14,25 +15,29 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
 
 @Configuration
-@PropertySource({ "classpath:persistence-multiple-db.properties" })
 @EnableJpaRepositories(
-        basePackages = "com.learn.demo.repository",
-        entityManagerFactoryRef = "employeeEntityManager",
-        transactionManagerRef = "employeeTransactionManager"
+        basePackages = "com.learn.demo.cnapsrepo",
+        entityManagerFactoryRef = "employeeEntityManagerCnaps",
+        transactionManagerRef = "employeeTransactionManagerCnaps"
 )
-public class EmployeePersistenceConf {
+public class EmployeeCnapsPersistenceConf {
+
+    @Value("${DB_URL_2}")
+    private String url;
+    @Value("${DB_USERNAME_2}")
+    private String username;
+    @Value("${DB_PASSWORD_2}")
+    private String password;
 
     @Bean
-    @Primary
-    public LocalContainerEntityManagerFactoryBean employeeEntityManager() {
+    public LocalContainerEntityManagerFactoryBean employeeEntityManagerCnaps() {
         LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource1());
+        em.setDataSource(dataSource2());
         em.setPackagesToScan(
-                "com.learn.demo.repository.entity");
+                "com.learn.demo.cnapsrepo.entity");
 
         HibernateJpaVendorAdapter vendorAdapter
                 = new HibernateJpaVendorAdapter();
@@ -41,23 +46,34 @@ public class EmployeePersistenceConf {
     }
 
     @Bean
-    public DataSource dataSource1() {
+    @FlywayDataSource
+    public Flyway flyway2() {
+        Flyway flyway = Flyway.configure()
+                .dataSource(dataSource2())
+                .locations("db/migration2") // Specify the migration scripts location
+                .baselineOnMigrate(true)
+                .load();
+        flyway.migrate();
+        return flyway;
+    }
+
+    @Bean
+    public DataSource dataSource2() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/eie");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("235689Sandy$");
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
         return dataSource;
     }
 
-    @Primary
     @Bean
-    public PlatformTransactionManager employeeTransactionManager() {
+    public PlatformTransactionManager employeeTransactionManagerCnaps() {
 
         JpaTransactionManager transactionManager
                 = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(
-                employeeEntityManager().getObject());
+                employeeEntityManagerCnaps().getObject());
         return transactionManager;
     }
 }

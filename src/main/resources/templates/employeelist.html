@@ -16,51 +16,28 @@
         </h1>
         <hr />
         <div class="container">
-                <form class="row" action="#" th:action="@{/employees}" method="get">
-                    <div class="col-2">
-                        <input type="text" class="form-control" name="keyword">
-                    </div>
-                    <div class="col-2">
-                        <select name="filterBy" class="form-select form-select-sm mb-3">
-                            <option selected th:value="firstName" th:text="Firstname"></option>
-                            <option th:value="lastName" th:text="Lastname"></option>
-                            <option th:value="function" th:text="Function"></option>
-                        </select>
-                    </div>
-                    <div id="date-search" class="col-3">
-                        <div class="row">
-                            <div class="row">
-                                <label>Hiring date</label>
-                                <input type="date" class="form-control" name="hiringDate">
-                            </div>
-                            <div class="row">
-                                <label>Departure date</label>
-                                <input type="date" class="form-control" name="departureDate">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-1">
-                        <select name="order" class="form-select form-select-sm mb-3">
-                            <option selected th:value="ASC" th:text="ASC"></option>
-                            <option th:value="DESC" th:text="DESC"></option>
-                        </select>
-                    </div>
-                    <div class="col-1">
-                        <div class="row">
-                            <p>Sex: </p>
-                            <select name="sex" class="form-select form-select-sm mb-3">
-                                <option selected th:value="All" th:text="All"></option>
-                                <option th:value="F" th:text="Female"></option>
-                                <option th:value="M" th:text="Male"></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-1">
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                    </div>
-                </form>
+            <form th:action="@{/employees}" method="get">
+                <input type="text" name="firstName" placeholder="First Name">
+                <input type="text" name="lastName" placeholder="Last Name">
+                <input type="text" name="function" placeholder="Function">
+                <select name="sex">
+                    <option value="" selected>Any</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+                <select name="orderBy">
+                    <option value="firstName">First Name</option>
+                    <option value="lastName">Last Name</option>
+                </select>
+                <select name="sortDirection">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
 
-                <button><a class="btn btn-success" th:href="@{/employees/csv(${employees})}">Export to csv</a></button>
+                <button type="submit">Apply Filters</button>
+            </form>
+            <a th:href="@{/export(firstName=${firstName}, lastName=${lastName}, function=${function}, sex=${sex}, orderBy=${orderBy}, sortDirection=${sortDirection}}"
+               class="btn btn-primary">Export to CSV</a>
         </div>
         <div class="scrollable">
             <table class="table table-striped table-bordered">

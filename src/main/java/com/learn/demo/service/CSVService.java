@@ -1,6 +1,6 @@
 package com.learn.demo.service;
 
-import com.learn.demo.repository.EmployeeRepository;
+import com.learn.demo.repository.EmployeeInternRepository;
 import com.learn.demo.repository.entity.EmployeeEntity;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 public class CSVService {
 
-    private EmployeeRepository employeeRepository;
+    private EmployeeInternRepository employeeInternRepository;
 
     public void writeEmployeesToCsv(Writer writer, List<EmployeeEntity> employeeEntities) {
         try (CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT)) {
