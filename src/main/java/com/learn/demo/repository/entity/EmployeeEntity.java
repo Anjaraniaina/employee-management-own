@@ -1,12 +1,14 @@
-package com.learn.demo.repository.entity;
+package com.learn.demo.repository.entity.employee;
 
 import com.learn.demo.model.Employee;
+import com.learn.demo.repository.entity.PhoneNumberEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,8 +17,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class EmployeeEntity {
+@Builder(toBuilder = true)
+public class EmployeeEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -26,6 +28,7 @@ public class EmployeeEntity {
     private String lastName;
     @Column(name = "first_name")
     private String firstName;
+    @Column(name = "birth_date")
     private LocalDate birthDate;
     @Column(columnDefinition = "TEXT")
     private String image;
@@ -34,7 +37,9 @@ public class EmployeeEntity {
     private List<PhoneNumberEntity> phoneNumbers;
     @Enumerated(EnumType.STRING)
     private Employee.Sex sex;
+    @Column(name = "email_pro")
     private String emailPro;
+    @Column(name = "email_perso")
     private String emailPerso;
     @Column(name = "\"cin_issue_date\"")
     private LocalDate CINIssueDate;
@@ -48,7 +53,9 @@ public class EmployeeEntity {
     private LocalDate hiringDate;
     @Column(name = "departure_date")
     private LocalDate departureDate;
+    @Column(name = "cnaps_number")
     private String cnapsNumber;
     @Enumerated(EnumType.STRING)
+    @Column(name = "socio_pro_category")
     private Employee.CSP socioProCategory;
 }
